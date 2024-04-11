@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище GymModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="ID_customer" />
+          </Key>
+          <Property Name="ID_customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="middlename" Type="varchar" MaxLength="20" />
+          <Property Name="ID_seasonticket" Type="int" Nullable="false" />
+          <Property Name="ID_trainer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seasonticket">
+          <Key>
+            <PropertyRef Name="ID_seasonticket" />
+          </Key>
+          <Property Name="ID_seasonticket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="term" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trainer">
+          <Key>
+            <PropertyRef Name="ID_trainer" />
+          </Key>
+          <Property Name="ID_trainer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="middlename" Type="varchar" MaxLength="20" />
+          <Property Name="age" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__customer__ID_sea__4D94879B">
+          <End Role="seasonticket" Type="Self.seasonticket" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seasonticket">
+              <PropertyRef Name="ID_seasonticket" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="ID_seasonticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__customer__ID_tra__4E88ABD4">
+          <End Role="trainer" Type="Self.trainer" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="ID_trainer" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="ID_trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище GymModelContainer">
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seasonticket" EntityType="Self.seasonticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trainer" EntityType="Self.trainer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__customer__ID_sea__4D94879B" Association="Self.FK__customer__ID_sea__4D94879B">
+            <End Role="seasonticket" EntitySet="seasonticket" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__customer__ID_tra__4E88ABD4" Association="Self.FK__customer__ID_tra__4E88ABD4">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GymModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="ID_customer" />
+          </Key>
+          <Property Name="ID_customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="middlename" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_seasonticket" Type="Int32" Nullable="false" />
+          <Property Name="ID_trainer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="seasonticket" Relationship="Self.FK__customer__ID_sea__4D94879B" FromRole="customer" ToRole="seasonticket" />
+          <NavigationProperty Name="trainer" Relationship="Self.FK__customer__ID_tra__4E88ABD4" FromRole="customer" ToRole="trainer" />
+        </EntityType>
+        <EntityType Name="seasonticket">
+          <Key>
+            <PropertyRef Name="ID_seasonticket" />
+          </Key>
+          <Property Name="ID_seasonticket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="term" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__customer__ID_sea__4D94879B" FromRole="seasonticket" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="trainer">
+          <Key>
+            <PropertyRef Name="ID_trainer" />
+          </Key>
+          <Property Name="ID_trainer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="middlename" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__customer__ID_tra__4E88ABD4" FromRole="trainer" ToRole="customer" />
+        </EntityType>
+        <Association Name="FK__customer__ID_sea__4D94879B">
+          <End Role="seasonticket" Type="Self.seasonticket" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seasonticket">
+              <PropertyRef Name="ID_seasonticket" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="ID_seasonticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__customer__ID_tra__4E88ABD4">
+          <End Role="trainer" Type="Self.trainer" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="ID_trainer" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="ID_trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="seasonticket" EntityType="Self.seasonticket" />
+          <EntitySet Name="trainer" EntityType="Self.trainer" />
+          <AssociationSet Name="FK__customer__ID_sea__4D94879B" Association="Self.FK__customer__ID_sea__4D94879B">
+            <End Role="seasonticket" EntitySet="seasonticket" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__customer__ID_tra__4E88ABD4" Association="Self.FK__customer__ID_tra__4E88ABD4">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GymModelContainer" CdmEntityContainer="GymEntities">
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="GymModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="ID_customer" ColumnName="ID_customer" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="ID_seasonticket" ColumnName="ID_seasonticket" />
+                <ScalarProperty Name="ID_trainer" ColumnName="ID_trainer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seasonticket">
+            <EntityTypeMapping TypeName="GymModel.seasonticket">
+              <MappingFragment StoreEntitySet="seasonticket">
+                <ScalarProperty Name="ID_seasonticket" ColumnName="ID_seasonticket" />
+                <ScalarProperty Name="term" ColumnName="term" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trainer">
+            <EntityTypeMapping TypeName="GymModel.trainer">
+              <MappingFragment StoreEntitySet="trainer">
+                <ScalarProperty Name="ID_trainer" ColumnName="ID_trainer" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="age" ColumnName="age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

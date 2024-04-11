@@ -1,0 +1,57 @@
+﻿<Page x:Class="wpf6.PageCustomer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:wpf6"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageCustomer">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="frame" Margin="5,5,5,5" NavigationUIVisibility="Hidden"/>
+        <DataGrid x:Name="CustomerGrid" Grid.Row="1" IsReadOnly="True" Margin="5" AutoGenerateColumns="True" SelectionChanged="CustomerGrid_SelectionChanged"/>
+        <TextBox
+         x:Name="TextBox1"
+         VerticalAlignment="Top" Margin="10,229,670,0" Height="39" Grid.Row="1"
+       />
+        <TextBox
+          x:Name="TextBox2"
+          VerticalAlignment="Top" Margin="172,230,508,0" Height="38" Grid.Row="1"
+        />
+        <TextBox
+          x:Name="TextBox3"
+          VerticalAlignment="Top" Margin="340,229,340,0" Height="39" Grid.Row="1"
+        />
+        <Button
+            Content="Добавить"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignOutlinedDarkButton}"
+            ToolTip="Resource name: MaterialDesignRaisedButton" Margin="556,288,10,58" Grid.Row="1" Click="Add_Button"
+            />
+        <Button
+            Content="Изменить"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignOutlinedDarkButton}"
+            ToolTip="Resource name: MaterialDesignRaisedButton" Margin="283,288,283,58" Grid.Row="1" Click="Change_Button"
+            />
+        <Button
+        Content="Удалить"
+        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+        Style="{StaticResource MaterialDesignOutlinedDarkButton}"
+        ToolTip="Resource name: MaterialDesignRaisedButton" Margin="10,288,551,58" Grid.Row="1" Click="Delete_Button"
+        />
+        <ComboBox
+            x:Name="combobox2"
+            IsEditable="True" Margin="670,229,10,0" Grid.Row="1" VerticalAlignment="Top" Height="39" SelectionChanged="ComboBox2_SelectionChanged"
+        />
+        <ComboBox
+         x:Name="combobox"
+         IsEditable="True" Margin="515,230,165,0" Grid.Row="1" VerticalAlignment="Top" Height="38" SelectionChanged="ComboBox_SelectionChanged"          
+        />
+    </Grid>
+</Page>
